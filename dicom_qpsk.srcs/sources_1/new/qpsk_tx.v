@@ -22,16 +22,13 @@ module qpsk_tx(
     //========================================================================
     // QPSK Gray Code Mapping
     //========================================================================
-    // Maps 2-bit symbols to constellation points:
-    //   00 -> (+127, +127)  Quadrant I
-    //   01 -> (-127, +127)  Quadrant II
-    //   11 -> (-127, -127)  Quadrant III
-    //   10 -> (+127, -127)  Quadrant IV
-    //========================================================================
     wire signed [7:0] i_base_raw, q_base_raw;
 
-    assign i_base_raw = (symbols[1] == 1'b0) ? 8'sd127 : -8'sd127;
-    assign q_base_raw = (symbols[0] == symbols[1]) ? 8'sd127 : -8'sd127;
+    qpsk_mapper u_qpsk_mapper(
+        .sym_in(symbols),
+        .i_out(i_base_raw),
+        .q_out(q_base_raw)
+    );
 
     //========================================================================
     // Baseband Gating: Force I=Q=0 when no valid symbol
@@ -101,10 +98,8 @@ module qpsk_tx(
         .aclk(clk_in1),
         .m_axis_data_tdata(dds_data),
         .m_axis_data_tvalid(),
-        .m_axis_data_tready(1'b1),
         .m_axis_phase_tdata(),
-        .m_axis_phase_tvalid(),
-        .m_axis_phase_tready(1'b1)
+        .m_axis_phase_tvalid()
     );
 
     //========================================================================
