@@ -58,7 +58,9 @@ if {$::dispatch::connected} {
 OPTRACE "async_fifo_8b_synth_1" START { ROLLUP_AUTO }
 set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
+set_param chipscope.maxJobs 8
 set_param synth.incrementalSynthesisCache C:/Users/28492/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-23964-TPC/incrSyn
+set_param xicom.use_bs_reader 1
 set_param simulator.modelsimInstallPath D:/tools/modelsim_ae/win32aloem
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000

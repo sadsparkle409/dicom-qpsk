@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-// Date        : Thu Apr  2 21:32:38 2026
+// Date        : Fri Apr  3 02:20:37 2026
 // Host        : TPC running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/dds_compiler_0/dds_compiler_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top dds_compiler_0 -prefix
+//               dds_compiler_0_ dds_compiler_0_stub.v
 // Design      : dds_compiler_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tfgg484-2

@@ -106,6 +106,7 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
+  set_param tcl.collectionResultDisplayLimit 0
   set_param checkpoint.writeSynthRtdsInDcp 1
   set_param general.usePosixSpawnForFork 1
   set_param chipscope.maxJobs 8
@@ -127,8 +128,10 @@ OPTRACE "set parameters" START { }
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.runs/synth_1/top.dcp
+  read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
   read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
   read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/async_fifo_8b/async_fifo_8b.xci
+  read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/ila_0/ila_0.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/constrs_1/new/constraints.xdc
 OPTRACE "read constraints: implementation" END { }

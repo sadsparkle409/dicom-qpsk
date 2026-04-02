@@ -14,10 +14,10 @@
         "Mode_of_Operation": [ { "value": "Standard", "resolve_type": "user", "usage": "all" } ],
         "Modulus": [ { "value": "9", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Output_Type": [ { "value": "Integer", "resolve_type": "user", "usage": "all" } ],
-        "Parameter_Entry": [ { "value": "Hardware_Parameters", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
-        "Spurious_Free_Dynamic_Range": [ { "value": "45", "resolve_type": "user", "format": "float", "usage": "all" } ],
-        "Frequency_Resolution": [ { "value": "0.4", "value_src": "user", "resolve_type": "user", "format": "float", "usage": "all" } ],
-        "Noise_Shaping": [ { "value": "None", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "Parameter_Entry": [ { "value": "System_Parameters", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "Spurious_Free_Dynamic_Range": [ { "value": "60", "value_src": "user", "resolve_type": "user", "format": "float", "usage": "all" } ],
+        "Frequency_Resolution": [ { "value": "0.04", "value_src": "user", "resolve_type": "user", "format": "float", "usage": "all" } ],
+        "Noise_Shaping": [ { "value": "Auto", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Phase_Width": [ { "value": "32", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Output_Width": [ { "value": "10", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Phase_Increment": [ { "value": "Fixed", "resolve_type": "user", "usage": "all" } ],
@@ -43,8 +43,8 @@
         "Latency": [ { "value": "3", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Has_ARESETn": [ { "value": "false", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Has_ACLKEN": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "Output_Frequency1": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "float", "usage": "all" } ],
-        "PINC1": [ { "value": "11001100110011001100110011001", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "Output_Frequency1": [ { "value": "12.5", "value_src": "user", "resolve_type": "user", "format": "float", "usage": "all" } ],
+        "PINC1": [ { "value": "00011001100110011001100110011010", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Phase_Offset_Angles1": [ { "value": "0", "resolve_type": "user", "format": "float", "usage": "all" } ],
         "POFF1": [ { "value": "0", "resolve_type": "user", "usage": "all" } ],
         "Output_Frequency2": [ { "value": "0", "resolve_type": "user", "format": "float", "usage": "all" } ],
@@ -354,5 +354,5 @@
       }
     }
   },
-  "checksum": "eab6e31f"
+  "checksum": "ce5d79d8"
 }

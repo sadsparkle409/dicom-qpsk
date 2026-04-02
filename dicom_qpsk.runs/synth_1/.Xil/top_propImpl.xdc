@@ -73,3 +73,5 @@ set_property src_info {type:XDC file:1 line:67 export:INPUT save:INPUT read:READ
 set_property -dict {PACKAGE_PIN T20 IOSTANDARD LVCMOS33} [get_ports {eth_tx_data[2]}]
 set_property src_info {type:XDC file:1 line:68 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVCMOS33} [get_ports {eth_tx_data[3]}]
+set_property src_info {type:XDC file:1 line:73 export:INPUT save:INPUT read:READ} [current_design]
+create_clock -period 4.000 -name clk_250m [get_ports clk_250m]

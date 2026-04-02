@@ -1,0 +1,2 @@
+mult_gen_0.vhd,vhdl,xil_defaultlib,../../../../dicom_qpsk.gen/sources_1/ip/mult_gen_0/sim/mult_gen_0.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+glbl.v,Verilog,xil_defaultlib,glbl.v

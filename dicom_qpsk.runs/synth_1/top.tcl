@@ -56,6 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param tcl.collectionResultDisplayLimit 0
 set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
 set_param chipscope.maxJobs 8
@@ -80,14 +81,17 @@ set_property ip_output_repo d:/FPGAProject/dicom_qpsk/dicom_qpsk.cache/ip [curre
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
+add_files d:/FPGAProject/dicom_qpsk/matlab/rrc_new_20p_6s.coe
 read_verilog -library xil_defaultlib {
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/arp.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/arp_rx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/arp_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/clk_dac.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/crc32_d8.v
+  D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/data_gen.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/eth_ctrl.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/gmii_to_rgmii.v
+  D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/qpsk_tx_test.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/rgmii_rx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/rgmii_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/udp/udp.v
@@ -96,6 +100,9 @@ read_verilog -library xil_defaultlib {
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/udp/udp_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/top.v
 }
+read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/dds_compiler_0/dds_compiler_0_ooc.xdc]
+
 read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
@@ -105,6 +112,12 @@ read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/async_fifo
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b_clocks.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b_ooc.xdc]
+
+read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/ila_0/ila_0.xci
+set_property used_in_synthesis false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila.xdc]
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_0_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -118,6 +131,8 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/constrs_1/new/constraints.xdc
 set_property used_in_implementation false [get_files D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/constrs_1/new/constraints.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/utils_1/imports/synth_1/top.dcp

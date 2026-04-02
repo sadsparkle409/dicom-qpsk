@@ -1,0 +1,9 @@
+xpm_cdc.sv,systemverilog,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+xpm_memory.sv,systemverilog,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+xpm_VCOMP.vhd,vhdl,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_VCOMP.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+xbip_utils_v3_0_vh_rfs.vhd,vhdl,xbip_utils_v3_0_15,../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+axi_utils_v2_0_vh_rfs.vhd,vhdl,axi_utils_v2_0_11,../../../ipstatic/hdl/axi_utils_v2_0_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+xbip_pipe_v3_0_vh_rfs.vhd,vhdl,xbip_pipe_v3_0_11,../../../ipstatic/hdl/xbip_pipe_v3_0_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+fir_compiler_v7_2_vh_rfs.vhd,vhdl,fir_compiler_v7_2_26,../../../ipstatic/hdl/fir_compiler_v7_2_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+fir_rrc.vhd,vhdl,xil_defaultlib,../../../../dicom_qpsk.gen/sources_1/ip/fir_rrc/sim/fir_rrc.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
+glbl.v,Verilog,xil_defaultlib,glbl.v

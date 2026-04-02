@@ -56,8 +56,15 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "clk_wiz_0_synth_1" START { ROLLUP_AUTO }
+set_param tcl.collectionResultDisplayLimit 0
+set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
+set_param chipscope.maxJobs 8
+set_param synth.incrementalSynthesisCache C:/Users/28492/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-23964-TPC/incrSyn
+set_param xicom.use_bs_reader 1
 set_param simulator.modelsimInstallPath D:/tools/modelsim_ae/win32aloem
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 OPTRACE "Creating in-memory project" START { }
@@ -69,7 +76,7 @@ set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir D:/FPGAProject/dicom_qpsk/dicom_qpsk.cache/wt [current_project]
 set_property parent.project_path D:/FPGAProject/dicom_qpsk/dicom_qpsk.xpr [current_project]
-set_property XPM_LIBRARIES XPM_CDC [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_output_repo d:/FPGAProject/dicom_qpsk/dicom_qpsk.cache/ip [current_project]

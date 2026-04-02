@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1775136953" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a100tfgg484-2" LaunchTime="1775156030" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
   <File Type="PA-TCL" Name="top.tcl"/>
   <File Type="REPORTS-TCL" Name="top_reports.tcl"/>
   <File Type="RDS-RDS" Name="top.vds"/>
@@ -11,14 +11,6 @@
   <File Type="VDS-TIMING-PB" Name="top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PIPUSERFILESDIR/sim_scripts/clk_wiz_0/xsim/glbl.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PIPUSERFILESDIR/ipstatic/mmcm_pll_drp_func_7s_pll.vh">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -131,6 +123,43 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/matlab/rrc_new_20p_6s.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/byte2symbol.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/qpsk_mapper.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/qpsk_tx.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/ip/dds_compiler_0/dds_compiler_0.xci">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/arp/arp.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -166,6 +195,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/data_gen.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/eth_ctrl.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -174,6 +210,13 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/gmii_to_rgmii/gmii_to_rgmii.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/qpsk_tx_test.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -269,4 +312,5 @@
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="clk_wiz_0"/>
   <BlockFileSet Type="BlockSrcs" Name="async_fifo_8b"/>
+  <BlockFileSet Type="BlockSrcs" Name="ila_0"/>
 </GenRun>

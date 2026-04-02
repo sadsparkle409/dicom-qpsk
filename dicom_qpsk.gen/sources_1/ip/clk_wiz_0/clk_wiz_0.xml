@@ -1390,6 +1390,96 @@
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>clock_CLK_OUT4</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>CLK_OUT4</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>clk_out4</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.FREQ_HZ">100000000</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>FREQ_TOLERANCE_HZ</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.FREQ_TOLERANCE_HZ">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>PHASE</spirit:name>
+          <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.PHASE">0.0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>CLK_DOMAIN</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.CLK_DOMAIN"/>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.ASSOCIATED_BUSIF"/>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_PORT</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.ASSOCIATED_PORT"/>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_RESET</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.ASSOCIATED_RESET"/>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.CLOCK_CLK_OUT4.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
   </spirit:busInterfaces>
   <spirit:model>
     <spirit:views>
@@ -1404,11 +1494,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:42 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:df597df0</spirit:value>
+            <spirit:value>9:cc25151a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1423,11 +1513,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:42 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:df597df0</spirit:value>
+            <spirit:value>9:cc25151a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1442,11 +1532,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:42 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1461,11 +1551,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:42 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1476,7 +1566,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1487,7 +1577,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:71bc8ccf</spirit:value>
+            <spirit:value>9:84d783f4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1501,11 +1591,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:51 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:54:18 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1519,11 +1609,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:43 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1534,7 +1624,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1550,11 +1640,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:42 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1568,11 +1658,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Apr 02 11:02:17 UTC 2026</spirit:value>
+            <spirit:value>Thu Apr 02 18:53:43 UTC 2026</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:f0a677f0</spirit:value>
+            <spirit:value>9:4a378d63</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2515,6 +2605,19 @@
         </spirit:wire>
       </spirit:port>
       <spirit:port>
+        <spirit:name>clk_out4</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
         <spirit:name>locked</spirit:name>
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
@@ -2595,7 +2698,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="INTEGER">
         <spirit:name>C_CLKOUT4_USED</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_USED" spirit:order="196">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_USED" spirit:order="196">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="INTEGER">
         <spirit:name>C_CLKOUT5_USED</spirit:name>
@@ -2699,7 +2802,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_PRIM_IN_FREQ</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_IN_FREQ" spirit:order="220">100.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_IN_FREQ" spirit:order="220">50</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_PRIM_IN_TIMEPERIOD</spirit:name>
@@ -2771,7 +2874,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="INTEGER">
         <spirit:name>C_NUM_OUT_CLKS</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_NUM_OUT_CLKS" spirit:order="234">3</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_NUM_OUT_CLKS" spirit:order="234">4</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT1_DRIVES</spirit:name>
@@ -2807,7 +2910,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_INCLK_SUM_ROW1</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_INCLK_SUM_ROW1" spirit:order="243">__primary_________100.000____________0.010</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_INCLK_SUM_ROW1" spirit:order="243">__primary______________50____________0.010</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_INCLK_SUM_ROW2</spirit:name>
@@ -2824,19 +2927,19 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_OUTCLK_SUM_ROW1</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW1" spirit:order="247">clk_out1__200.00000______0.000______50.0______125.501____116.405</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW1" spirit:order="247">clk_out1__200.00000______0.000______50.0______167.628____139.020</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_OUTCLK_SUM_ROW2</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW2" spirit:order="248">clk_out2__125.00000______0.000______50.0______137.096____116.405</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW2" spirit:order="248">clk_out2__125.00000______0.000______50.0______184.234____139.020</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_OUTCLK_SUM_ROW3</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW3" spirit:order="249">clk_out3___6.25000______0.000______50.0______250.130____116.405</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW3" spirit:order="249">clk_out3___6.25000______0.000______50.0______348.826____139.020</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_OUTCLK_SUM_ROW4</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW4" spirit:order="250">no_CLK_OUT4_output</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OUTCLK_SUM_ROW4" spirit:order="250">clk_out4__250.00000______0.000______50.0______161.331____139.020</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_OUTCLK_SUM_ROW5</spirit:name>
@@ -2864,7 +2967,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT4_REQUESTED_OUT_FREQ</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_REQUESTED_OUT_FREQ" spirit:order="257">100.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_REQUESTED_OUT_FREQ" spirit:order="257">250.000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT5_REQUESTED_OUT_FREQ</spirit:name>
@@ -2948,7 +3051,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT4_OUT_FREQ</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_OUT_FREQ" spirit:order="278">100.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_OUT_FREQ" spirit:order="278">250.00000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT5_OUT_FREQ</spirit:name>
@@ -3004,7 +3107,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT4_DUTY_CYCLE</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_DUTY_CYCLE" spirit:order="292">50.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT4_DUTY_CYCLE" spirit:order="292">50.0</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT5_DUTY_CYCLE</spirit:name>
@@ -3064,15 +3167,15 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKFBOUT_MULT_F</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKFBOUT_MULT_F" spirit:order="298">7.500</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKFBOUT_MULT_F" spirit:order="298">15.000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKIN1_PERIOD</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKIN1_PERIOD" spirit:order="299">10.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKIN1_PERIOD" spirit:order="299">20.000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKIN2_PERIOD</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKIN2_PERIOD" spirit:order="300">10.000</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKIN2_PERIOD" spirit:order="300">10.0</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKOUT4_CASCADE</spirit:name>
@@ -3116,7 +3219,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKOUT3_DIVIDE</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKOUT3_DIVIDE" spirit:order="311">1</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MMCM_CLKOUT3_DIVIDE" spirit:order="311">3</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_MMCM_CLKOUT4_DIVIDE</spirit:name>
@@ -3480,7 +3583,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKIN1_JITTER_PS</spirit:name>
-        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKIN1_JITTER_PS" spirit:order="402">100.0</spirit:value>
+        <spirit:value spirit:format="float" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKIN1_JITTER_PS" spirit:order="402">200.0</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKIN2_JITTER_PS</spirit:name>
@@ -3642,7 +3745,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_DIVIDE4_AUTO</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIVIDE4_AUTO" spirit:order="411">0.26666666666666666</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIVIDE4_AUTO" spirit:order="411">0.8</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_DIVIDE5_AUTO</spirit:name>
@@ -3750,7 +3853,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT3_ACTUAL_FREQ</spirit:name>
-        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT3_ACTUAL_FREQ" spirit:order="714">100.000</spirit:value>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_CLKOUT3_ACTUAL_FREQ" spirit:order="714">250.00000</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="STRING">
         <spirit:name>C_CLKOUT4_ACTUAL_FREQ</spirit:name>
@@ -4235,7 +4338,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>PRIM_IN_FREQ</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.PRIM_IN_FREQ" spirit:order="14.401" spirit:configGroups="0 NoDisplay">100.000</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.PRIM_IN_FREQ" spirit:order="14.401" spirit:configGroups="0 NoDisplay">50</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>PRIM_IN_TIMEPERIOD</spirit:name>
@@ -4299,7 +4402,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKIN1_JITTER_PS</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKIN1_JITTER_PS" spirit:order="27" spirit:configGroups="0 NoDisplay">100.0</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKIN1_JITTER_PS" spirit:order="27" spirit:configGroups="0 NoDisplay">200.0</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKIN2_JITTER_PS</spirit:name>
@@ -4319,7 +4422,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT4_USED</spirit:name>
-      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_USED" spirit:order="31" spirit:configGroups="0 NoDisplay">false</spirit:value>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_USED" spirit:order="31" spirit:configGroups="0 NoDisplay">true</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT5_USED</spirit:name>
@@ -4335,7 +4438,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>NUM_OUT_CLKS</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.NUM_OUT_CLKS" spirit:order="407" spirit:configGroups="0 NoDisplay" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">3</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.NUM_OUT_CLKS" spirit:order="407" spirit:configGroups="0 NoDisplay" spirit:minimum="1" spirit:maximum="7" spirit:rangeType="long">4</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLK_OUT1_USE_FINE_PS_GUI</spirit:name>
@@ -4479,7 +4582,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT4_REQUESTED_OUT_FREQ</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_REQUESTED_OUT_FREQ" spirit:order="71" spirit:configGroups="0 NoDisplay">100.000</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_REQUESTED_OUT_FREQ" spirit:order="71" spirit:configGroups="0 NoDisplay">250.000</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT4_REQUESTED_PHASE</spirit:name>
@@ -4731,7 +4834,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKFBOUT_MULT_F</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKFBOUT_MULT_F" spirit:order="126" spirit:configGroups="0 NoDisplay">7.500</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKFBOUT_MULT_F" spirit:order="126" spirit:configGroups="0 NoDisplay">15.000</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKFBOUT_PHASE</spirit:name>
@@ -4743,11 +4846,11 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKIN1_PERIOD</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKIN1_PERIOD" spirit:order="129" spirit:configGroups="0 NoDisplay">10.000</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKIN1_PERIOD" spirit:order="129" spirit:configGroups="0 NoDisplay">20.000</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKIN2_PERIOD</spirit:name>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKIN2_PERIOD" spirit:order="130" spirit:configGroups="0 NoDisplay">10.000</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKIN2_PERIOD" spirit:order="130" spirit:configGroups="0 NoDisplay">10.0</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKOUT4_CASCADE</spirit:name>
@@ -4823,7 +4926,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKOUT3_DIVIDE</spirit:name>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKOUT3_DIVIDE" spirit:order="149" spirit:configGroups="0 NoDisplay">1</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.MMCM_CLKOUT3_DIVIDE" spirit:order="149" spirit:configGroups="0 NoDisplay">3</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>MMCM_CLKOUT3_DUTY_CYCLE</spirit:name>
@@ -5090,42 +5193,42 @@
     <spirit:parameter>
       <spirit:name>CLKOUT1_JITTER</spirit:name>
       <spirit:displayName>Clkout1 Jitter</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT1_JITTER" spirit:order="1000">125.501</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT1_JITTER" spirit:order="1000">167.628</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT1_PHASE_ERROR</spirit:name>
       <spirit:displayName>Clkout1 Phase</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT1_PHASE_ERROR" spirit:order="1001">116.405</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT1_PHASE_ERROR" spirit:order="1001">139.020</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT2_JITTER</spirit:name>
       <spirit:displayName>Clkout2 Jitter</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT2_JITTER" spirit:order="1002">137.096</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT2_JITTER" spirit:order="1002">184.234</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT2_PHASE_ERROR</spirit:name>
       <spirit:displayName>Clkout2 Phase</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT2_PHASE_ERROR" spirit:order="1003">116.405</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT2_PHASE_ERROR" spirit:order="1003">139.020</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT3_JITTER</spirit:name>
       <spirit:displayName>Clkout3 Jitter</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT3_JITTER" spirit:order="1004">250.130</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT3_JITTER" spirit:order="1004">348.826</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT3_PHASE_ERROR</spirit:name>
       <spirit:displayName>Clkout3 Phase</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT3_PHASE_ERROR" spirit:order="1005">116.405</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT3_PHASE_ERROR" spirit:order="1005">139.020</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT4_JITTER</spirit:name>
       <spirit:displayName>Clkout4 Jitter</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_JITTER" spirit:order="1006">0.0</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_JITTER" spirit:order="1006">161.331</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT4_PHASE_ERROR</spirit:name>
       <spirit:displayName>Clkout4 Phase</spirit:displayName>
-      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_PHASE_ERROR" spirit:order="1007">0.0</spirit:value>
+      <spirit:value spirit:format="float" spirit:resolve="user" spirit:id="PARAM_VALUE.CLKOUT4_PHASE_ERROR" spirit:order="1007">139.020</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>CLKOUT5_JITTER</spirit:name>
@@ -5202,6 +5305,7 @@
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_LITE.PROTOCOL" xilinx:valueSource="constant"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_LITE.RUSER_WIDTH" xilinx:valueSource="constant"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_LITE.WUSER_WIDTH" xilinx:valueSource="constant"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKIN1_JITTER_PS" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT1_JITTER" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT1_PHASE_ERROR" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT1_REQUESTED_OUT_FREQ" xilinx:valueSource="user"/>
@@ -5213,11 +5317,19 @@
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT3_PHASE_ERROR" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT3_REQUESTED_OUT_FREQ" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT3_USED" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT4_JITTER" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT4_PHASE_ERROR" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT4_REQUESTED_OUT_FREQ" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.CLKOUT4_USED" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKFBOUT_MULT_F" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKIN1_PERIOD" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKIN2_PERIOD" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKOUT0_DIVIDE_F" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKOUT1_DIVIDE" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKOUT2_DIVIDE" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MMCM_CLKOUT3_DIVIDE" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.NUM_OUT_CLKS" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.PRIM_IN_FREQ" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.RESET_PORT" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.RESET_TYPE" xilinx:valueSource="user"/>
       </xilinx:configElementInfos>

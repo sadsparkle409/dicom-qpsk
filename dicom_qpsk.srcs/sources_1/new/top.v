@@ -44,7 +44,7 @@ module top(
     );
 
     wire clk_200m, clk_125m, clk_6m25, locked, sys_rst_n;
-
+    wire clk_250m;
     // System reset (Released only after PLL is locked)
     assign sys_rst_n = resetn & locked;
 
@@ -52,6 +52,7 @@ module top(
         .clk_out1(clk_200m),
         .clk_out2(clk_125m),
         .clk_out3(clk_6m25),
+        .clk_out4(clk_250m),
         .resetn(resetn),
         .locked(locked),
         .clk_in1(clk)
@@ -182,14 +183,13 @@ module top(
     //==================================================
     // qpsk_tx: QPSK modulation and IF generation
     //==================================================
-    // TEST: Use qpsk_tx_test to verify DDS frequency
-    qpsk_tx_test u_qpsk_tx (
+    qpsk_tx u_qpsk_tx (
         .clk_in1      (clk_125m),
         .resetn       (sys_rst_n),
         .symbols      (symbol),
         .symbol_valid (symbol_valid),
-        .da_data_o1   (da_data1),        // Should be pure 12.5MHz sine
-        .da_data_o2   (da_data2)         // Should be pure 12.5MHz cosine
+        .da_data_o1   (da_data1),        // IF output (modulated)
+        .da_data_o2   (da_data2)         // I baseband (for debug)
     );
 
 endmodule
