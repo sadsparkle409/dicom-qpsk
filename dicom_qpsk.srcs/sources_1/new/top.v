@@ -182,13 +182,14 @@ module top(
     //==================================================
     // qpsk_tx: QPSK modulation and IF generation
     //==================================================
-    qpsk_tx u_qpsk_tx (
+    // TEST: Use qpsk_tx_test to verify DDS frequency
+    qpsk_tx_test u_qpsk_tx (
         .clk_in1      (clk_125m),
         .resetn       (sys_rst_n),
         .symbols      (symbol),
-        .symbol_valid (symbol_valid),    // 0 when no data -> clean spectrum
-        .da_data_o1   (da_data1),        // IF output (modulated)
-        .da_data_o2   (da_data2)         // I baseband (for debug)
+        .symbol_valid (symbol_valid),
+        .da_data_o1   (da_data1),        // Should be pure 12.5MHz sine
+        .da_data_o2   (da_data2)         // Should be pure 12.5MHz cosine
     );
 
 endmodule
