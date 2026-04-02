@@ -44,7 +44,6 @@ module top(
     );
 
     wire clk_200m, clk_125m, clk_6m25, locked, sys_rst_n;
-    wire da_clk1_buf;  // For ILA debug
 
     // System reset (Released only after PLL is locked)
     assign sys_rst_n = resetn & locked;
@@ -58,17 +57,16 @@ module top(
         .clk_in1(clk)
         );
 
-    ila_0 m_ila_0(
-        .clk(clk_125m),
-        .probe0(clk_125m),
-        .probe1(da_clk1_buf)  // Through BUFG for fabric routing
-        );
+    // ILA debug - use clk_125m as reference (da_clk1 is same frequency)
+    // To debug 6.25MHz issue, observe:
+    // - symbol (QPSK symbol value)
+    // - symbol_valid
+    // - da_data1 (final output)
         
     clk_dac u_clk_dac(
         .clk_in1(clk_125m),
         .clk_out1(da_clk1),
-        .clk_out2(da_clk2),
-        .clk_out1_buf(da_clk1_buf)  // For ILA debug
+        .clk_out2(da_clk2)
         );
 
     //==================================================
