@@ -9,13 +9,16 @@
 // Project Name:
 // Target Devices:
 // Tool Versions:
-// Description: Top module with UDP data loopback/processing in top level
+// Description: Top module with UDP to QPSK transmission
+//              - Receives UDP data via Ethernet
+//              - Converts to QPSK symbols
+//              - Outputs 12.5MHz IF signal via DAC
+//              - Clean spectrum when no data (DDS continuous, baseband gated)
 //
 // Dependencies:
 //
 // Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
+// Revision 0.02 - Integrated QPSK transmission chain
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -53,6 +56,7 @@ module top(
         .locked(locked),
         .clk_in1(clk)
         );
+
     clk_dac u_clk_dac(
         .clk_in1(clk_125m),
         .clk_out1(da_clk1),
@@ -82,7 +86,14 @@ module top(
     wire          fifo_empty;         // FIFO empty flag
 
     //==================================================
-    // UDP loopback logic in top level
+    // QPSK TX signals
+    //==================================================
+    wire [1:0]    symbol;             // QPSK symbol
+    wire          symbol_valid;       // Symbol valid
+    wire          byte2symbol_busy;   // byte2symbol busy flag
+
+    //==================================================
+    // UDP loopback logic
     // Trigger transmit when packet received, filter 0-byte packets
     //==================================================
     assign udp_tx_start_en = udp_rec_pkt_done && (udp_rec_byte_num > 16'd0);
@@ -95,12 +106,12 @@ module top(
     //==================================================
     // Asynchronous FIFO for UDP data buffering
     // Write: gmii_rx_clk domain (125MHz)
-    // Read:  gmii_tx_clk domain (125MHz, same frequency, different phase)
+    // Read:  clk_6m25 domain (6.25MHz symbol rate)
     //==================================================
     async_fifo_8b u_udp_fifo (
         .rst           (~sys_rst_n   ),
-        .wr_clk        (eth_rx_clk   ),  // Use ethernet receive clock
-        .rd_clk        (eth_rx_clk   ),  // Use same clock (simplified)
+        .wr_clk        (eth_rx_clk   ),  // 125MHz from GMII
+        .rd_clk        (clk_6m25     ),  // 6.25MHz symbol clock
         .din           (udp_rec_data ),
         .wr_en         (udp_rec_en   ),
         .rd_en         (fifo_rd_en   ),
@@ -111,10 +122,10 @@ module top(
         .rd_rst_busy   ()
     );
 
-    // FIFO read enable: when UDP requests data and FIFO not empty
-    assign fifo_rd_en = udp_tx_req && ~fifo_empty;
+    // FIFO read enable: when FIFO not empty
+    assign fifo_rd_en = ~fifo_empty;
 
-    // TX data from FIFO
+    // TX data from FIFO (loopback to UDP)
     assign udp_tx_data = fifo_dout;
 
     //==================================================
@@ -153,15 +164,30 @@ module top(
     );
 
     //==================================================
-    // User data processing area
-    // You can add your own logic here to process UDP data
-    // instead of simple loopback
-    //
-    // Example:
-    // 1. Read data from FIFO to your processing module
-    // 2. Process the data (DICOM decode, etc.)
-    // 3. Write processed data to another FIFO
-    // 4. Connect that FIFO to udp_tx_data
+    // byte2symbol: Convert 8-bit data to 2-bit QPSK symbols
     //==================================================
+    byte2symbol #(
+        .BIT_ORDER(0)           // LSB first
+    ) u_byte2symbol (
+        .clk          (clk_6m25),
+        .rst_n        (sys_rst_n),
+        .din          (fifo_dout),
+        .din_valid    (fifo_rd_en),      // Read when FIFO not empty
+        .pkt_done     (udp_rec_pkt_done), // Packet done flush
+        .symbol_out   (symbol),
+        .symbol_valid (symbol_valid)
+    );
+
+    //==================================================
+    // qpsk_tx: QPSK modulation and IF generation
+    //==================================================
+    qpsk_tx u_qpsk_tx (
+        .clk_in1      (clk_125m),
+        .resetn       (sys_rst_n),
+        .symbols      (symbol),
+        .symbol_valid (symbol_valid),    // 0 when no data -> clean spectrum
+        .da_data_o1   (da_data1),        // IF output (modulated)
+        .da_data_o2   (da_data2)         // I baseband (for debug)
+    );
 
 endmodule
