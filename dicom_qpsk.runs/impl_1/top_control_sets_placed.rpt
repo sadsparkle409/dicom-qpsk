@@ -1,0 +1,120 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Thu Apr  2 21:37:19 2026
+| Host         : TPC running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
+| Design       : top
+| Device       : xc7a100t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    42 |
+|    Minimum number of control sets                        |    42 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    49 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    42 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |     5 |
+| >= 6 to < 8        |     2 |
+| >= 8 to < 10       |    10 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    24 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             139 |           31 |
+| No           | No                    | Yes                    |              69 |           41 |
+| No           | Yes                   | No                     |               3 |            2 |
+| Yes          | No                    | No                     |              41 |           16 |
+| Yes          | No                    | Yes                    |             760 |          220 |
+| Yes          | Yes                   | No                     |              99 |           23 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++---------------------------------------------------+-------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|                    Clock Signal                   |                                                Enable Signal                                                |                                                           Set/Reset Signal                                                           | Slice Load Count | Bel Load Count | Bels / Slice |
++---------------------------------------------------+-------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk |                                                                                                             | u_udp_top/u_async_fifo_8b/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.sckt_wr_rst_ic_reg_0 |                2 |              3 |         1.50 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/cnt0                                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              5 |         2.50 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/cnt0                                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                4 |              5 |         1.25 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_tx/data_cnt[4]_i_1_n_0                                                                | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              5 |         2.50 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/real_add_cnt0                                                                      | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                1 |              5 |         5.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/cnt[0]                                                                             | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                4 |              5 |         1.25 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_tx/cnt[5]_i_1_n_0                                                                     | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                3 |              6 |         2.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/ip_head[2][15]_i_2_n_0                                                             | u_udp_top/u_udp/u_udp_tx/ip_head[2][15]_i_1_n_0                                                                                      |                2 |              7 |         3.50 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_tx/gmii_txd[7]_i_1__0_n_0                                                             | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |              8 |         1.60 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/op_data[15]                                                                        | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                3 |              8 |         2.67 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/eth_type[15]_i_1_n_0                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              8 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/op_data[0]                                                                         | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                3 |              8 |         2.67 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/udp_byte_num[7]_i_1_n_0                                                            | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                3 |              8 |         2.67 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/udp_byte_num[15]_i_1_n_0                                                           | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              8 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/rec_en_reg_0[0]                                                                    | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              8 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/eth_type[11]                                                                       | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                2 |              8 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/gmii_tx_en0                                                                        | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |              8 |         1.60 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/ip_head[2][15]_i_2_n_0                                                             |                                                                                                                                      |                4 |              9 |         2.25 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/E[0]                                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             16 |         3.20 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/data_byte_num0                                                                     | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             16 |         3.20 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/rec_byte_num0                                                                      | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             16 |         3.20 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/data_cnt0                                                                          | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                4 |             16 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/check_buffer0                                                                      | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             20 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_async_fifo_8b/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_rd_en | u_udp_top/u_async_fifo_8b/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.sckt_rd_rst_ic_reg_0 |                6 |             24 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/data_cnt0                                                                          | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             24 |         4.80 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/des_ip0                                                                            | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                5 |             24 |         4.80 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/trig_tx_en_reg_0                                                                   | u_udp_top/u_arp/u_arp_rx/trig_tx_en_reg                                                                                              |                7 |             32 |         4.57 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/tx_done_reg_0[0]                                                                   | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               14 |             32 |         2.29 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/des_ip_t[0]                                                                        | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                7 |             32 |         4.57 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/src_ip_t[0]                                                                        | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               10 |             32 |         3.20 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/trig_tx_en_reg_0                                                                   |                                                                                                                                      |               12 |             32 |         2.67 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_tx/E[0]                                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               15 |             32 |         2.13 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_async_fifo_8b/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/E[0]      | u_udp_top/u_async_fifo_8b/U0/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gsckt_wrst.gic_rst.sckt_wr_rst_ic_reg_0 |                8 |             36 |         4.50 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_tx/tx_data_num0                                                                       | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               14 |             45 |         3.21 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/FSM_onehot_cur_state_reg[1]_0[0]                                                   | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               11 |             48 |         4.36 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/src_mac_t[0]                                                                       | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               17 |             48 |         2.82 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_udp/u_udp_rx/des_mac0                                                                           | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |                9 |             48 |         5.33 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/des_mac_t0                                                                         | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               12 |             48 |         4.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk |                                                                                                             | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               41 |             69 |         1.68 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/E[0]                                                                               | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               18 |             80 |         4.44 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk | u_udp_top/u_arp/u_arp_rx/arp_rx_done_i_1_n_0                                                                | u_udp_top/u_arp/u_arp_rx/resetn                                                                                                      |               16 |             80 |         5.00 |
+|  u_udp_top/u_gmii_to_rgmii/u_rgmii_rx/gmii_tx_clk |                                                                                                             |                                                                                                                                      |               31 |            141 |         4.55 |
++---------------------------------------------------+-------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+
+
