@@ -40,7 +40,11 @@ module top(
     output [9:0] da_data1,
     output [9:0] da_data2,
     output       da_clk1,
-    output       da_clk2
+    output       da_clk2,
+
+    // Test control
+    input        sw_test_mode,     // 1 = use data_gen, 0 = use UDP
+    input        btn_start         // Button to start test pattern
     );
 
     wire clk_200m, clk_125m, clk_6m25, locked, sys_rst_n;
@@ -91,6 +95,12 @@ module top(
     wire [1:0]    symbol;             // QPSK symbol
     wire          symbol_valid;       // Symbol valid
     wire          byte2symbol_busy;   // byte2symbol busy flag
+
+    //==================================================
+    // Test pattern generator signals
+    //==================================================
+    wire [1:0]    test_symbol;        // Symbol from data_gen
+    wire          test_symbol_valid;  // Valid from data_gen
 
     //==================================================
     // UDP loopback logic
@@ -172,11 +182,31 @@ module top(
         .clk          (clk_6m25),
         .rst_n        (sys_rst_n),
         .din          (fifo_dout),
-        .din_valid    (fifo_rd_en),      // Read when FIFO not empty
-        .pkt_done     (udp_rec_pkt_done), // Packet done flush
-        .symbol_out   (symbol),
-        .symbol_valid (symbol_valid)
+        .din_valid    (fifo_rd_en),              // Read when FIFO not empty
+        .pkt_done     (udp_rec_pkt_done),        // Packet done flush
+        .symbol_out   (symbol_from_byte2symbol),
+        .symbol_valid (symbol_valid_from_byte2symbol)
     );
+
+    //==================================================
+    // Test pattern generator
+    //==================================================
+    data_gen u_data_gen (
+        .clk          (clk_6m25),
+        .rst_n        (sys_rst_n),
+        .enable       (btn_start || sw_test_mode),  // Start when button pressed or switch enabled
+        .symbol_out   (test_symbol),
+        .symbol_valid (test_symbol_valid)
+    );
+
+    //==================================================
+    // Data source selection: UDP or Test Pattern
+    //==================================================
+    assign symbol       = sw_test_mode ? test_symbol : symbol_from_byte2symbol;
+    assign symbol_valid = sw_test_mode ? test_symbol_valid : symbol_valid_from_byte2symbol;
+
+    wire [1:0] symbol_from_byte2symbol;
+    wire symbol_valid_from_byte2symbol;
 
     //==================================================
     // qpsk_tx: QPSK modulation and IF generation
