@@ -58,7 +58,8 @@ module qpsk_tx(
                 valid_cnt <= valid_cnt + 1'b1;
 
             // Only sample once at the start of each 20-cycle window
-            if (valid_cnt == 0)
+            // AND only when symbol is valid (same as QPSK project)
+            if (valid_cnt == 0 && symbol_valid)
                 tvalid <= 1'b1;
         end
     end
