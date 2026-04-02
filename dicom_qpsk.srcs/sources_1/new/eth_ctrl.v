@@ -14,16 +14,6 @@ module eth_ctrl(
     input              udp_tx_done      ,    //UDP transmit done signal
     input              udp_gmii_tx_en   ,    //UDP GMII transmit data valid
     input     [7:0]    udp_gmii_txd     ,    //UDP GMII transmit data
-    //UDP FIFO interface signals
-    input     [7:0]    udp_rec_data     ,    //UDP receive data
-    input              udp_rec_en       ,    //UDP receive enable
-    input              udp_tx_req       ,    //UDP data request signal
-    output     [7:0]   udp_tx_data      ,    //UDP transmit data read from FIFO
-    //FIFO interface signals (connect to external async_fifo)
-    input      [7:0]   tx_data          ,    //Processed transmit data (from unpack module)
-    output             tx_req           ,    //FIFO read request (driven by udp_tx)
-    output reg         rec_en           ,    //FIFO write enable (UDP receive data to FIFO)
-    output reg [7:0]   rec_data         ,    //FIFO write data (UDP receive data)
     //GMII transmit port
     output reg         gmii_tx_en       ,    //GMII transmit data valid
     output reg [7:0]   gmii_txd              //GMII transmit data
@@ -33,41 +23,12 @@ module eth_ctrl(
 reg [1:0]  protocol_sel;      //Protocol selector: 00=ARP, 01=UDP
 reg        udp_tx_busy;       //UDP transmit busy flag
 reg        arp_rx_flag;       //ARP request received flag (wait for idle to send reply)
-reg        udp_tx_req_d0;     //UDP request delayed 1 cycle (align with FIFO read data)
 
 //*****************************************************
 //**                 main code
 //*****************************************************
 
 assign arp_tx_type = 1'b1;                                      //ARP transmit type fixed to ARP reply
-assign tx_req = udp_tx_req;                                     //FIFO read request from UDP
-assign udp_tx_data  = udp_tx_req_d0  ? tx_data : 8'd0;          //UDP data gate (delayed for alignment)
-
-//Delay UDP request by 1 cycle to align with FIFO read data
-always @(posedge clk or negedge rst_n) begin
-    if(!rst_n) begin
-        udp_tx_req_d0  <= 1'd0;
-    end
-    else begin
-        udp_tx_req_d0  <= udp_tx_req;
-    end
-end
-
-//Write received data to FIFO
-always @(posedge clk or negedge rst_n) begin
-    if(!rst_n) begin
-        rec_en   <= 1'd0;
-        rec_data <= 8'd0;
-    end
-    else if(udp_rec_en) begin
-        rec_en   <= udp_rec_en;
-        rec_data <= udp_rec_data;
-    end
-    else begin
-        rec_en   <= 1'd0;
-        rec_data <= rec_data;
-    end
-end
 
 //Protocol arbitration: select GMII output based on protocol_sel
 always @(posedge clk or negedge rst_n) begin
@@ -83,7 +44,7 @@ always @(posedge clk or negedge rst_n) begin
             end
             2'b01: begin                           //Select UDP protocol output
                 gmii_tx_en <= udp_gmii_tx_en;
-                gmii_txd   <= udp_gmii_txd  ;
+                gmii_txd   <= udp_gmii_txd;
             end
             default: begin
                 gmii_tx_en <= 1'b0;

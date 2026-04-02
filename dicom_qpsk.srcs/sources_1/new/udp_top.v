@@ -9,7 +9,7 @@
 // Project Name:
 // Target Devices:
 // Tool Versions:
-// Description: UDP loopback top module with RGMII interface
+// Description: UDP module with external data interface for top-level processing
 //
 // Dependencies:
 //
@@ -31,7 +31,25 @@ module udp_top(
     output        eth_tx_clk , // RGMII transmit clock
     output        eth_tx_ctl , // RGMII transmit control (data enable)
     output [3:0]  eth_tx_data, // RGMII transmit data
-    output        eth_rst_n    // Ethernet PHY reset, active low
+    output        eth_rst_n  , // Ethernet PHY reset, active low
+
+    // UDP receive interface (to top module for processing)
+    output        udp_rec_pkt_done,   // UDP packet receive done
+    output [15:0] udp_rec_byte_num,   // UDP received byte count
+    output [47:0] src_mac,            // Source MAC address from received packet
+    output [31:0] src_ip,             // Source IP address from received packet
+
+    // UDP transmit interface (from top module after processing)
+    input         udp_tx_start_en,    // UDP transmit start enable
+    input  [15:0] udp_tx_byte_num,    // UDP transmit byte count
+    input  [47:0] dest_mac,           // Destination MAC address for transmit
+    input  [31:0] dest_ip,            // Destination IP address for transmit
+
+    // FIFO interface for data loopback/processing
+    output [7:0]  udp_rec_data,       // UDP received data (to FIFO)
+    output        udp_rec_en,         // UDP receive data enable
+    input  [7:0]  udp_tx_data,        // UDP transmit data (from FIFO)
+    input         udp_tx_req          // UDP data request signal
     );
 
     //==================================================
@@ -64,43 +82,18 @@ module udp_top(
     wire  [7:0]   arp_gmii_txd;       // ARP GMII transmit data
     wire          arp_rx_done;        // ARP receive done
     wire          arp_rx_type;        // ARP receive type: 0=request, 1=reply
-    wire  [47:0]  src_mac;            // Received source MAC address
-    wire  [31:0]  src_ip;             // Received source IP address
     wire          arp_tx_en;          // ARP transmit enable
     wire          arp_tx_type;        // ARP transmit type: 0=request, 1=reply
-    wire  [47:0]  dest_mac;           // Destination MAC address for transmit
-    wire  [31:0]  dest_ip;            // Destination IP address for transmit
     wire          arp_tx_done;        // ARP transmit done
 
-    // UDP module signals
+    // UDP module internal signals
     wire          udp_gmii_tx_en;     // UDP GMII transmit enable
     wire  [7:0]   udp_gmii_txd;       // UDP GMII transmit data
-    wire          udp_rec_pkt_done;   // UDP packet receive done
-    wire          udp_rec_en;         // UDP receive enable
-    wire  [7:0]   udp_rec_data;       // UDP receive data
-    wire  [15:0]  udp_rec_byte_num;   // UDP received byte count
-    wire  [15:0]  udp_tx_byte_num;    // UDP transmit byte count
     wire          udp_tx_done;        // UDP transmit done
-    wire          udp_tx_req;         // UDP data request
-    wire  [7:0]   udp_tx_data;        // UDP transmit data
-    wire          udp_tx_start_en;    // UDP transmit start enable
-
-    // FIFO and eth_ctrl signals
-    wire  [7:0]   rec_data;           // Receive data to FIFO
-    wire          rec_en;             // Receive enable to FIFO
-    wire          tx_req;             // FIFO read request
-    wire  [7:0]   fifo_dout;          // FIFO output data
 
     //==================================================
-    // UDP loopback logic
+    // Output assignments
     //==================================================
-    // Trigger transmit when packet received, filter 0-byte packets
-    assign udp_tx_start_en = udp_rec_pkt_done && (udp_rec_byte_num > 16'd0);
-    assign udp_tx_byte_num = udp_rec_byte_num;
-    // Loopback: destination points to sender
-    assign dest_mac = src_mac;
-    assign dest_ip  = src_ip;
-    // PHY reset
     assign eth_rst_n = resetn;
 
     //==================================================
@@ -154,8 +147,8 @@ module udp_top(
         .src_ip        (src_ip       ),
         .arp_tx_en     (arp_tx_en    ),
         .arp_tx_type   (arp_tx_type  ),
-        .des_mac       (dest_mac     ),
-        .des_ip        (dest_ip      ),
+        .des_mac       (src_mac      ),  // Loopback: reply to sender
+        .des_ip        (src_ip       ),  // Loopback: reply to sender
         .tx_done       (arp_tx_done  )
         );
 
@@ -184,7 +177,7 @@ module udp_top(
         .rec_data      (udp_rec_data  ),
         .rec_byte_num  (udp_rec_byte_num),
         .tx_start_en   (udp_tx_start_en),
-        .tx_data       (udp_tx_data   ),
+        .tx_data       (udp_tx_data   ),  // Direct from top FIFO
         .tx_byte_num   (udp_tx_byte_num),
         .des_mac       (dest_mac      ),
         .des_ip        (dest_ip       ),
@@ -193,24 +186,7 @@ module udp_top(
         );
 
     //==================================================
-    // Asynchronous FIFO for UDP loopback
-    //==================================================
-    async_fifo_8b u_async_fifo_8b (
-        .rst           (~resetn      ),
-        .wr_clk        (gmii_rx_clk  ),
-        .rd_clk        (gmii_tx_clk  ),
-        .din           (rec_data     ),
-        .wr_en         (rec_en       ),
-        .rd_en         (tx_req       ),
-        .dout          (fifo_dout    ),
-        .full          (),
-        .empty         (),
-        .wr_rst_busy   (),
-        .rd_rst_busy   ()
-    );
-
-    //==================================================
-    // Ethernet control module
+    // Ethernet control module (protocol arbitration only)
     //==================================================
     eth_ctrl u_eth_ctrl(
         .clk                (gmii_rx_clk   ),
@@ -228,16 +204,6 @@ module udp_top(
         .udp_tx_done        (udp_tx_done   ),
         .udp_gmii_tx_en     (udp_gmii_tx_en),
         .udp_gmii_txd       (udp_gmii_txd  ),
-
-        .udp_rec_data       (udp_rec_data  ),
-        .udp_rec_en         (udp_rec_en    ),
-        .udp_tx_req         (udp_tx_req    ),
-        .udp_tx_data        (udp_tx_data   ),
-
-        .tx_data            (fifo_dout     ),
-        .tx_req             (tx_req        ),
-        .rec_en             (rec_en        ),
-        .rec_data           (rec_data      ),
 
         .gmii_tx_en         (gmii_tx_en    ),
         .gmii_txd           (gmii_txd      )
