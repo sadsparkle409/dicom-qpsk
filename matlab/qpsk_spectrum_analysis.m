@@ -15,7 +15,7 @@ N = N_sym * osr;      % 2000 * 20 = 40000 samples
 t = (0:N-1)/fs;
 
 %% QPSK Symbols
-sym_seq = [0, 1, 3, 2];
+sym_seq = [0, 1, 2, 3];
 symbols = sym_seq(mod(0:N_sym-1, 4) + 1);
 
 %% QPSK Mapping

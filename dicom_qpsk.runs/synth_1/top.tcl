@@ -56,15 +56,8 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param tcl.collectionResultDisplayLimit 0
-set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
-set_param chipscope.maxJobs 8
-set_param synth.incrementalSynthesisCache C:/Users/28492/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-23964-TPC/incrSyn
-set_param xicom.use_bs_reader 1
 set_param simulator.modelsimInstallPath D:/tools/modelsim_ae/win32aloem
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tfgg484-2
 
@@ -81,7 +74,7 @@ set_property ip_output_repo d:/FPGAProject/dicom_qpsk/dicom_qpsk.cache/ip [curre
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-add_files d:/FPGAProject/dicom_qpsk/matlab/rrc_new_20p_6s.coe
+add_files D:/FPGAProject/dicom_qpsk/matlab/rrc_new_20p_6s.coe
 read_verilog -library xil_defaultlib {
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/arp.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/arp/arp_rx.v
@@ -91,7 +84,8 @@ read_verilog -library xil_defaultlib {
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/data_gen.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/eth_ctrl.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/gmii_to_rgmii.v
-  D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/qpsk_tx_test.v
+  D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/qpsk_mapper.v
+  D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/qpsk_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/rgmii_rx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/gmii_to_rgmii/rgmii_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/udp/udp.v
@@ -100,24 +94,25 @@ read_verilog -library xil_defaultlib {
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/udp/udp_tx.v
   D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/new/top.v
 }
-read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
+read_ip -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/dds_compiler_0/dds_compiler_0.xci
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/dds_compiler_0/dds_compiler_0_ooc.xdc]
 
-read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+read_ip -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
 
-read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/async_fifo_8b/async_fifo_8b.xci
+read_ip -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/async_fifo_8b/async_fifo_8b.xci
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b_clocks.xdc]
 set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/async_fifo_8b/async_fifo_8b_ooc.xdc]
 
-read_ip -quiet d:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/ila_0/ila_0.xci
-set_property used_in_synthesis false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
-set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila_impl.xdc]
-set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_v6_2/constraints/ila.xdc]
-set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/ila_0/ila_0_ooc.xdc]
+read_ip -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/fir_rrc/fir_rrc.xci
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/fir_rrc/constraints/fir_compiler_v7_2.xdc]
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/fir_rrc/fir_rrc_ooc.xdc]
+
+read_ip -quiet D:/FPGAProject/dicom_qpsk/dicom_qpsk.srcs/sources_1/ip/mult_gen_0/mult_gen_0.xci
+set_property used_in_implementation false [get_files -all d:/FPGAProject/dicom_qpsk/dicom_qpsk.gen/sources_1/ip/mult_gen_0/mult_gen_0_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

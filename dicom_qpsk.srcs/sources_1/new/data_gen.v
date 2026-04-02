@@ -34,9 +34,9 @@ module data_gen(
                 // Cycle through 00, 01, 11, 10
                 case (sym_cnt)
                     2'b00: sym_cnt <= 2'b01;
-                    2'b01: sym_cnt <= 2'b11;
-                    2'b11: sym_cnt <= 2'b10;
-                    2'b10: sym_cnt <= 2'b00;
+                    2'b01: sym_cnt <= 2'b10;
+                    2'b10: sym_cnt <= 2'b11;
+                    2'b11: sym_cnt <= 2'b00;
                     default: sym_cnt <= 2'b00;
                 endcase
             end else begin

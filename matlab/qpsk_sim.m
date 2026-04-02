@@ -19,7 +19,7 @@ t = (0:N-1)/fs;       % Time vector
 
 %% 1. QPSK Symbol Generation (same as data_gen.v)
 % Sequence: 00 -> 01 -> 11 -> 10 -> 00 ...
-sym_seq = [0, 1, 3, 2];  % 00, 01, 11, 10
+sym_seq = [0, 1, 2, 3];  % 00, 01, 10, 11
 symbols = zeros(1, N_sym);
 for i = 1:N_sym
     symbols(i) = sym_seq(mod(i-1, 4) + 1);
