@@ -122,8 +122,8 @@ module top(
         .rd_rst_busy   ()
     );
 
-    // FIFO read enable: when FIFO not empty
-    assign fifo_rd_en = ~fifo_empty;
+    // FIFO read enable: when UDP requests data and FIFO not empty
+    assign fifo_rd_en = udp_tx_req && ~fifo_empty;
 
     // TX data from FIFO (loopback to UDP)
     assign udp_tx_data = fifo_dout;
