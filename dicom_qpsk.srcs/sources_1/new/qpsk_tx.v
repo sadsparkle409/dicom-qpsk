@@ -30,8 +30,8 @@ module qpsk_tx(
     //========================================================================
     wire signed [7:0] i_base_raw, q_base_raw;
 
-    assign i_base_raw = (symbols[1] == 1'b0) ? 8'sd127 : 8'sd-127;
-    assign q_base_raw = (symbols[0] == symbols[1]) ? 8'sd127 : 8'sd-127;
+    assign i_base_raw = (symbols[1] == 1'b0) ? 8'sd127 : -8'sd127;
+    assign q_base_raw = (symbols[0] == symbols[1]) ? 8'sd127 : -8'sd127;
 
     //========================================================================
     // Baseband Gating: Force I=Q=0 when no valid symbol
