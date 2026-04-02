@@ -10,8 +10,8 @@ fc = 12.5e6;          % Carrier frequency (12.5 MHz)
 osr = fs/fsym;        % Oversampling ratio (20)
 
 %% Generate longer signal for better spectrum resolution
-N_sym = 200;          % More symbols for smooth spectrum
-N = N_sym * osr;
+N_sym = 2000;         % More symbols for smooth spectrum (need > 8192 samples)
+N = N_sym * osr;      % 2000 * 20 = 40000 samples
 t = (0:N-1)/fs;
 
 %% QPSK Symbols
