@@ -1,0 +1,84 @@
+{
+  "name": "fpga-design-workflow",
+  "description": "Complete FPGA design workflow: Theory → Algorithm → MATLAB → FPGA Implementation",
+  "version": "1.0",
+  "stages": [
+    {
+      "id": "theory",
+      "name": "通信理论",
+      "description": "理解通信系统原理、调制方式、编码理论",
+      "agent": "telecom-theory-expert",
+      "inputs": ["用户问题/需求"],
+      "outputs": ["理论解释", "关键参数", "设计约束"],
+      "next": ["algorithm"],
+      "completionCriteria": "用户理解理论原理并确认参数"
+    },
+    {
+      "id": "algorithm",
+      "name": "DSP算法设计",
+      "description": "设计信号处理算法，包括滤波器、采样率转换、量化分析",
+      "agent": "dsp-communication-theorist",
+      "inputs": ["理论参数", "性能要求"],
+      "outputs": ["算法规格", "MATLAB参数", "定点分析"],
+      "next": ["matlab", "verilog"],
+      "completionCriteria": "算法参数确定，可进入仿真"
+    },
+    {
+      "id": "matlab",
+      "name": "MATLAB验证",
+      "description": "创建MATLAB仿真，验证算法正确性，生成参考数据",
+      "agent": "agent-orchestrator",
+      "subtasks": [
+        {
+          "agent": "dsp-communication-theorist",
+          "task": "生成MATLAB代码和滤波器系数"
+        },
+        {
+          "agent": "verilog-implementation-expert",
+          "task": "准备Verilog验证平台参数"
+        }
+      ],
+      "inputs": ["算法规格"],
+      "outputs": ["MATLAB仿真结果", "参考波形", "系数文件(.coe)"],
+      "next": ["verilog"],
+      "completionCriteria": "MATLAB仿真通过，生成.coe文件"
+    },
+    {
+      "id": "verilog",
+      "name": "Verilog实现",
+      "description": "编写RTL代码，配置Xilinx IP，实现硬件功能",
+      "agent": "verilog-implementation-expert",
+      "inputs": ["算法规格", "MATLAB参数"],
+      "outputs": ["Verilog模块", "IP配置文件", "仿真测试平台"],
+      "next": ["integration"],
+      "completionCriteria": "代码综合通过，功能仿真正确"
+    },
+    {
+      "id": "integration",
+      "name": "系统集成",
+      "description": "多模块集成，时序分析，硬件验证",
+      "agent": "fpga-integration-lead",
+      "inputs": ["各模块RTL", "IP实例化"],
+      "outputs": ["集成报告", "时序报告", "资源利用率"],
+      "next": [],
+      "completionCriteria": "bitstream生成成功，板级测试通过"
+    }
+  ],
+  "triggers": [
+    {
+      "pattern": "设计.*(滤波器|调制|编码|系统)",
+      "stage": "theory",
+      "autoStart": false
+    },
+    {
+      "pattern": "实现.*(FPGA|Verilog|RTL)",
+      "stage": "verilog",
+      "autoStart": false
+    },
+    {
+      "pattern": "完整设计|全流程|从理论到实现",
+      "stage": "theory",
+      "autoStart": true
+    }
+  ]
+}

@@ -62,7 +62,7 @@ module udp_top(
     // Destination MAC address (broadcast): ff:ff:ff:ff:ff:ff
     parameter DES_MAC   = 48'hff_ff_ff_ff_ff_ff;
     // Destination IP address: 192.168.1.102
-    parameter DES_IP    = {8'd192, 8'd168, 8'd1, 8'd102};
+    parameter DES_IP    = {8'd192, 8'd168, 8'd1, 8'd150};
     // IDELAY value: 0 for no delay; n for n*78ps delay
     parameter IDELAY_VALUE = 0;
 

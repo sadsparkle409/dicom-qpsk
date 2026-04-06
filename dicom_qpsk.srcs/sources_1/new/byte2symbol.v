@@ -26,7 +26,8 @@ module byte2symbol #(
 
     // Output: 2-bit symbol for QPSK
     output reg [1:0]  symbol_out,   // 2-bit symbol
-    output reg        symbol_valid  // 1=valid data, 0=idle (FIFO empty)
+    output reg        symbol_valid, // 1=valid data, 0=idle (FIFO empty)
+    output            fifo_rd_req   // FIFO read request (for next byte pre-fetch)
 );
 
     //========================================================================
@@ -35,6 +36,12 @@ module byte2symbol #(
     reg [7:0]  shift_reg;       // Shift register to hold byte
     reg [2:0]  sym_cnt;         // Symbol counter (0-3 for 4 symbols)
     reg        busy;            // Currently outputting symbols
+
+    //========================================================================
+    // FIFO read request - Request next byte when processing last symbol
+    // This enables pre-fetch for continuous symbol output without gap
+    //========================================================================
+    assign fifo_rd_req = busy && (sym_cnt == 3'd3) && din_valid;
 
     //========================================================================
     // Main state machine - Output valid when busy, invalid when idle

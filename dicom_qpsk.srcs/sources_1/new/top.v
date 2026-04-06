@@ -91,23 +91,23 @@ module top(
     wire          fifo_rd_en;         // FIFO read enable
     wire          fifo_full;          // FIFO full flag
     wire          fifo_empty;         // FIFO empty flag
+    wire          fifo_rd_req;        // FIFO read request from byte2symbol
+
+    //==================================================
+    // UDP transmit control - disabled (RX-only design)
+    // To enable TX, add separate TX FIFO and arbiter logic
+    //==================================================
+    assign udp_tx_start_en = 1'b0;
+    assign udp_tx_byte_num = 16'd0;
+    assign dest_mac = 48'd0;
+    assign dest_ip  = 32'd0;
+    assign udp_tx_data = 8'd0;
 
     //==================================================
     // QPSK TX signals
     //==================================================
     wire [1:0]    symbol;             // QPSK symbol
     wire          symbol_valid;       // Symbol valid
-
-    //==================================================
-    // UDP loopback logic
-    // Trigger transmit when packet received, filter 0-byte packets
-    //==================================================
-    assign udp_tx_start_en = udp_rec_pkt_done && (udp_rec_byte_num > 16'd0);
-    assign udp_tx_byte_num = udp_rec_byte_num;
-
-    // Loopback: destination points to sender
-    assign dest_mac = src_mac;
-    assign dest_ip  = src_ip;
 
     //==================================================
     // Asynchronous FIFO for UDP data buffering
@@ -128,14 +128,24 @@ module top(
         .rd_rst_busy   ()
     );
 
-    // FIFO read enable: when UDP requests data and FIFO not empty
-    assign fifo_rd_en = udp_tx_req && ~fifo_empty;
-
-    // TX data from FIFO (loopback to UDP)
-    assign udp_tx_data = fifo_dout;
+    ila_0 u_ila(
+        .clk(clk_250m),
+        .probe0(udp_rec_en),
+        .probe1(udp_rec_data),
+        .probe2(fifo_empty),
+        .probe3(fifo_rd_en),
+        .probe4(fifo_rd_req),
+        .probe5(fifo_dout),
+        .probe6(symbol),
+        .probe7(symbol_valid)
+        );
+    // FIFO read enable: controlled by byte2symbol for precise pre-fetch timing
+    // Read when: (1) initial load (!busy && !empty) or (2) pre-fetch request (sym_cnt=3)
+    assign fifo_rd_en = (~fifo_empty && ~symbol_valid) || fifo_rd_req;
 
     //==================================================
     // UDP top module instance
+    // RX → QPSK, TX → reserved for future use
     //==================================================
     udp_top u_udp_top(
         .clk_in1            (clk_200m      ),
@@ -150,13 +160,13 @@ module top(
         .eth_tx_data        (eth_tx_data   ),
         .eth_rst_n          (eth_rst_n     ),
 
-        // UDP receive interface (to top)
+        // UDP receive interface (to QPSK)
         .udp_rec_pkt_done   (udp_rec_pkt_done),
         .udp_rec_byte_num   (udp_rec_byte_num),
         .src_mac            (src_mac       ),
         .src_ip             (src_ip        ),
 
-        // UDP transmit interface (from top)
+        // UDP transmit interface (reserved for future use)
         .udp_tx_start_en    (udp_tx_start_en),
         .udp_tx_byte_num    (udp_tx_byte_num),
         .dest_mac           (dest_mac      ),
@@ -170,30 +180,19 @@ module top(
     );
 
     //==================================================
-    // Current TX milestone: use an internal test pattern for DAC/QPSK bring-up.
-    // The UDP path is still active for loopback and FIFO verification.
+    // UDP to QPSK symbol mapping
+    // Converts 8-bit UDP data to 2-bit QPSK symbols (1 byte = 4 symbols)
     //==================================================
-    data_gen u_data_gen (
+    byte2symbol u_byte2symbol (
         .clk          (clk_6m25),
         .rst_n        (sys_rst_n),
-        .enable       (1'b1),
+        .din          (fifo_dout),
+        .din_valid    (~fifo_empty),
+        .pkt_done     (udp_rec_pkt_done),
         .symbol_out   (symbol),
-        .symbol_valid (symbol_valid)
+        .symbol_valid (symbol_valid),
+        .fifo_rd_req  (fifo_rd_req)
     );
-
-    //==================================================
-    // Next TX step: replace the test generator with UDP-driven symbol mapping.
-    // The module is kept here as the intended hook-up for the next milestone.
-    //==================================================
-//    byte2symbol u_byte2symbol (
-//        .clk          (clk_6m25),
-//        .rst_n        (sys_rst_n),
-//        .din          (fifo_dout),
-//        .din_valid    (~fifo_empty),
-//        .pkt_done     (udp_rec_pkt_done),
-//        .symbol_out   (symbol),
-//        .symbol_valid (symbol_valid)
-//    );
 
     //==================================================
     // qpsk_tx: QPSK modulation and IF generation
@@ -206,5 +205,7 @@ module top(
         .da_data_o1   (da_data1),        // IF output (modulated)
         .da_data_o2   (da_data2)         // I baseband (for debug)
     );
+    
+
 
 endmodule
