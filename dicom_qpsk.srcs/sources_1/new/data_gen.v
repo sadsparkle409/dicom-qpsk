@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Module Name: data_gen
 // Description: QPSK Test Pattern Generator
-//              Generates 00 -> 01 -> 11 -> 10 sequence for QPSK verification
+//              Generates 00 -> 01 -> 10 -> 11 sequence for QPSK verification
 //              Symbol rate: 6.25MHz
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ module data_gen(
 
     //========================================================================
     // Symbol sequence generator
-    // Sequence: 00 -> 01 -> 11 -> 10 -> 00 ...
+    // Sequence: 00 -> 01 -> 10 -> 11 -> 00 ...
     // This cycles through all 4 QPSK constellation points
     //========================================================================
     reg [1:0] sym_cnt;

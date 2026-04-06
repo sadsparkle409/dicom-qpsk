@@ -13,17 +13,17 @@
         "PortAType": [ { "value": "Signed", "resolve_type": "user", "usage": "all" } ],
         "PortAWidth": [ { "value": "16", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "PortBType": [ { "value": "Signed", "resolve_type": "user", "usage": "all" } ],
-        "PortBWidth": [ { "value": "10", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "PortBWidth": [ { "value": "12", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "ConstValue": [ { "value": "129", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "CcmImp": [ { "value": "Distributed_Memory", "resolve_type": "user", "usage": "all" } ],
         "Multiplier_Construction": [ { "value": "Use_LUTs", "resolve_type": "user", "usage": "all" } ],
         "OptGoal": [ { "value": "Speed", "resolve_type": "user", "usage": "all" } ],
         "Use_Custom_Output_Width": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "OutputWidthHigh": [ { "value": "25", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "OutputWidthHigh": [ { "value": "27", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "OutputWidthLow": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "UseRounding": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "RoundPoint": [ { "value": "0", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
-        "PipeStages": [ { "value": "2", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "PipeStages": [ { "value": "4", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "ClockEnable": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "SyncClear": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "SclrCePriority": [ { "value": "SCLR_Overrides_CE", "resolve_type": "user", "enabled": false, "usage": "all" } ],
@@ -36,12 +36,12 @@
         "C_XDEVICEFAMILY": [ { "value": "artix7", "resolve_type": "generated", "usage": "all" } ],
         "C_HAS_CE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_HAS_SCLR": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_LATENCY": [ { "value": "2", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_LATENCY": [ { "value": "4", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_A_WIDTH": [ { "value": "16", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_A_TYPE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_B_WIDTH": [ { "value": "10", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_B_WIDTH": [ { "value": "12", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_B_TYPE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_OUT_HIGH": [ { "value": "25", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_OUT_HIGH": [ { "value": "27", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_OUT_LOW": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_MULT_TYPE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_CE_OVERRIDES_SCLR": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
@@ -79,8 +79,8 @@
       "ports": {
         "CLK": [ { "direction": "in", "driver_value": "0x1" } ],
         "A": [ { "direction": "in", "size_left": "15", "size_right": "0", "driver_value": "0" } ],
-        "B": [ { "direction": "in", "size_left": "9", "size_right": "0", "driver_value": "0" } ],
-        "P": [ { "direction": "out", "size_left": "25", "size_right": "0", "driver_value": "0" } ]
+        "B": [ { "direction": "in", "size_left": "11", "size_right": "0", "driver_value": "0" } ],
+        "P": [ { "direction": "out", "size_left": "27", "size_right": "0", "driver_value": "0" } ]
       },
       "interfaces": {
         "a_intf": {
@@ -155,5 +155,5 @@
       }
     }
   },
-  "checksum": "f3f15075"
+  "checksum": "b6481d52"
 }

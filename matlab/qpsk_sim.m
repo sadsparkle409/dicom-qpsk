@@ -60,7 +60,7 @@ q_up(1:osr:end) = q_base;
 %% 4. RRC Filter (simplified as raised cosine for simulation)
 % In FPGA, this is a 120-tap FIR filter
 rolloff = 0.35;
-span = 6;
+span = 8;
 rrc_filter = rcosdesign(rolloff, span, osr, 'sqrt');
 
 % Filter the upsampled signals

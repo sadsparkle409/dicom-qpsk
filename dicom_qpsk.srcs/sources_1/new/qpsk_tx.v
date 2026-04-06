@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Module Name: qpsk_tx
-// Description: QPSK Transmitter with clean spectrum control
-//              - DDS runs continuously (no phase jump)
-//              - Baseband gating: I=Q=0 when no valid symbol
-//              - RRC pulse shaping, 12.5MHz IF output
+// Description: QPSK Transmitter - Simplified Version
+//              - DDS runs continuously
+//              - RRC always running (tvalid every 20 cycles)
+//              - Baseband zero when no data (natural gating via RRC)
 //
 // Parameters:
 //   12.5MHz IF, 6.25MHz symbol rate, 125MHz DAC sample rate
@@ -13,8 +13,8 @@
 module qpsk_tx(
     input        clk_in1,          // 125MHz clock
     input        resetn,
-    input  [1:0] symbols,          // QPSK symbols from byte2symbol
-    input        symbol_valid,     // Symbol valid (0 when no data)
+    input  [1:0] symbols,          // QPSK symbols from the active symbol source
+    input        symbol_valid,     // High for active symbols, low for idle gating
     output [9:0] da_data_o1,       // DAC1: IF output (modulated)
     output [9:0] da_data_o2        // DAC2: I baseband (for debug)
     );
@@ -33,15 +33,15 @@ module qpsk_tx(
     //========================================================================
     // Baseband Gating: Force I=Q=0 when no valid symbol
     // This ensures clean spectrum (no carrier leakage) when no data
+    // Note: symbol_valid=0 when FIFO empty, RRC input=0 creates natural decay
     //========================================================================
-    wire signed [7:0] i_base, q_base;
-    assign i_base = symbol_valid ? i_base_raw : 8'sd0;
-    assign q_base = symbol_valid ? q_base_raw : 8'sd0;
+    wire signed [7:0] i_base = symbol_valid ? i_base_raw : 8'sd0;
+    wire signed [7:0] q_base = symbol_valid ? q_base_raw : 8'sd0;
 
     //========================================================================
     // RRC Pulse Shaping (20x oversampling)
+    // Generate tvalid every 20 cycles - independent of symbol_valid
     //========================================================================
-    // Generate tvalid for RRC (one pulse every 20 cycles)
     reg [4:0] valid_cnt;
     reg       tvalid;
 
@@ -50,17 +50,13 @@ module qpsk_tx(
             valid_cnt <= 0;
             tvalid    <= 0;
         end else begin
-            tvalid <= 0;
-
+            // Generate tvalid every 20 cycles at symbol rate
             if (valid_cnt == 19)
                 valid_cnt <= 0;
             else
                 valid_cnt <= valid_cnt + 1'b1;
 
-            // Only sample once at the start of each 20-cycle window
-            // AND only when symbol is valid (same as QPSK project)
-            if (valid_cnt == 0 && symbol_valid)
-                tvalid <= 1'b1;
+            tvalid <= (valid_cnt == 0);
         end
     end
 
@@ -85,15 +81,14 @@ module qpsk_tx(
     );
 
     //========================================================================
-    // DDS: Continuous 12.5MHz carrier (always running for phase continuity)
+    // DDS: Continuous 12.5MHz carrier
     //========================================================================
     wire [31:0] dds_data;
-    wire signed [9:0] cos, sin;
+    wire signed [11:0] cos, sin;
 
     // DDS output format: [31:0] = {sin[15:0], cos[15:0]}
-    // Take upper 10 bits
-    assign cos = dds_data[9:0];
-    assign sin = dds_data[25:16];
+    assign cos = dds_data[11:0];
+    assign sin = dds_data[27:16];
 
     dds_compiler_0 u_dds_compiler (
         .aclk(clk_in1),
@@ -107,10 +102,9 @@ module qpsk_tx(
     // Complex Mixing: I*cos - Q*sin
     // When i_rrc=q_rrc=0 (no data), output is naturally 0
     //========================================================================
-    wire signed [25:0] i_mix, q_mix;
-    wire signed [25:0] if_temp;
+    wire signed [27:0] i_mix, q_mix;
+    wire signed [27:0] if_temp;
 
-    // I * cos
     mult_gen_0 u_mult_i (
         .CLK(clk_in1),
         .A(i_rrc),
@@ -118,7 +112,6 @@ module qpsk_tx(
         .P(i_mix)
     );
 
-    // Q * sin
     mult_gen_0 u_mult_q (
         .CLK(clk_in1),
         .A(q_rrc),
@@ -130,13 +123,12 @@ module qpsk_tx(
     assign if_temp = i_mix - q_mix;
 
     //========================================================================
-    // Output Formatting
+    // Output Formatting - Simplified, no complex gating
     // Signed to unsigned: -512~511 -> 0~1023
-    // When no data: if_temp=0 -> if_out_raw=512 (mid-scale = 0V)
     //========================================================================
     wire [9:0] if_out_raw, i_out_raw;
-    assign if_out_raw = if_temp[24:15] + 10'd512;  // IF signal
-    assign i_out_raw  = i_mix[24:15] + 10'd512;     // I baseband for debug
+    assign if_out_raw = if_temp[27:18] + 10'd512;
+    assign i_out_raw  = i_mix[27:18] + 10'd512;
 
     assign da_data_o1 = if_out_raw;
     assign da_data_o2 = i_out_raw;

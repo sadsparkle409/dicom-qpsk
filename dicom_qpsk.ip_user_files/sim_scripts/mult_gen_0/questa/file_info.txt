@@ -1,7 +1,0 @@
-xpm_cdc.sv,systemverilog,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-xpm_memory.sv,systemverilog,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-xpm_VCOMP.vhd,vhdl,xpm,D:/tools/AMDDesignTools/2025.2/Vivado/data/ip/xpm/xpm_VCOMP.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-xbip_utils_v3_0_vh_rfs.vhd,vhdl,xbip_utils_v3_0_15,../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-mult_gen_v12_0_vh_rfs.vhd,vhdl,mult_gen_v12_0_24,../../../ipstatic/hdl/mult_gen_v12_0_vh_rfs.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-mult_gen_0.vhd,vhdl,xil_defaultlib,../../../../dicom_qpsk.gen/sources_1/ip/mult_gen_0/sim/mult_gen_0.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-glbl.v,Verilog,xil_defaultlib,glbl.v

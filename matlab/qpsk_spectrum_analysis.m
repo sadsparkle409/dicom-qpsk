@@ -9,14 +9,37 @@ fsym = 6.25e6;        % Symbol rate (6.25 MHz)
 fc = 12.5e6;          % Carrier frequency (12.5 MHz)
 osr = fs/fsym;        % Oversampling ratio (20)
 
-%% Generate longer signal for better spectrum resolution
-N_sym = 2000;         % More symbols for smooth spectrum (need > 8192 samples)
-N = N_sym * osr;      % 2000 * 20 = 40000 samples
-t = (0:N-1)/fs;
+%% Read payload bytes from a local file, or fall back to a deterministic pattern
+payload_file = '';
+if ~isempty(payload_file) && isfile(payload_file)
+    fid = fopen(payload_file, 'rb');
+    file_bytes = fread(fid, '*uint8');
+    fclose(fid);
+    payload_desc = payload_file;
+else
+    file_bytes = uint8(mod(0:4095, 256));
+    payload_desc = 'local increment pattern';
+end
 
-%% QPSK Symbols
-sym_seq = [0, 1, 2, 3];
-symbols = sym_seq(mod(0:N_sym-1, 4) + 1);
+% Convert bytes to bits (MSB first) -> 1 x (8*byte_num) row vector
+bits = reshape(de2bi(file_bytes, 8, 'left-msb')', 1, []);
+
+% QPSK bit pairs are mapped exactly like qpsk_mapper.v:
+% 00 -> (+,+), 01 -> (-,+), 11 -> (-,-), 10 -> (+,-)
+N_sym_file = floor(length(bits) / 2);
+bit_pairs = bits(1:2*N_sym_file);
+bit_pairs_reshaped = reshape(bit_pairs, 2, N_sym_file)';
+symbols = bi2de(bit_pairs_reshaped, 'left-msb')';
+
+% If file is too short, repeat; if too long, truncate for demo
+N_sym = length(symbols);
+if N_sym < 2000
+    repeat_times = ceil(2000 / N_sym);
+    symbols = repmat(symbols, 1, repeat_times);
+    N_sym = length(symbols);
+end
+N = N_sym * osr;
+t = (0:N-1)/fs;
 
 %% QPSK Mapping
 i_base = zeros(1, N_sym);
@@ -25,8 +48,8 @@ for i = 1:N_sym
     switch symbols(i)
         case 0;  i_base(i) = 127;  q_base(i) = 127;
         case 1;  i_base(i) = -127; q_base(i) = 127;
-        case 3;  i_base(i) = -127; q_base(i) = -127;
         case 2;  i_base(i) = 127;  q_base(i) = -127;
+        case 3;  i_base(i) = -127; q_base(i) = -127;
     end
 end
 
@@ -34,7 +57,7 @@ end
 i_up = zeros(1, N); q_up = zeros(1, N);
 i_up(1:osr:end) = i_base; q_up(1:osr:end) = q_base;
 
-rolloff = 0.35; span = 6;
+rolloff = 0.35; span = 12;
 rrc_filter = rcosdesign(rolloff, span, osr, 'sqrt');
 i_rrc = filter(rrc_filter, 1, i_up);
 q_rrc = filter(rrc_filter, 1, q_up);
@@ -86,6 +109,7 @@ legend('IF Signal', 'Envelope');
 
 %% Figure 2: Frequency Domain Analysis
 figure('Name', 'Spectrum Analysis', 'Position', [50 50 1400 600]);
+sgtitle(sprintf('QPSK Spectrum Analysis (%s)', payload_desc), 'Interpreter', 'none');
 
 % Use pwelch for smooth spectrum
 [pxx_if, f] = pwelch(if_signal, hamming(8192), 4096, 65536, fs, 'centered');
@@ -166,6 +190,57 @@ xline(12.5, 'r--', 'f_c = 12.5 MHz', 'LineWidth', 2);
 xline(12.5 + fsym/1e6, 'g:', '12.5 + 6.25');
 xline(12.5 - fsym/1e6, 'g:', '12.5 - 6.25');
 legend('IF Spectrum', 'Carrier', 'Sidebands');
+
+%% Figure 4: FFT Spectrum for Real Data
+% Using a fixed-size FFT on the first large chunk (2^18 samples).
+% With non-periodic DICOM data, the spectrum appears continuous.
+
+n_fft = min(N, 2^18);
+x_fft = if_signal(1:n_fft);
+X = fft(x_fft) / n_fft;
+f_shift = (-n_fft/2 : n_fft/2 - 1) * fs / n_fft;
+X_shift = fftshift(X);
+
+figure('Name', 'FFT Spectrum', 'Position', [50 50 1400 600]);
+
+% Full spectrum
+subplot(2, 2, 1);
+plot(f_shift/1e6, 20*log10(abs(X_shift)), 'b-', 'LineWidth', 0.8);
+grid on; xlabel('Frequency (MHz)'); ylabel('Magnitude (dB)');
+title('FFT Full Spectrum (DICOM Data)');
+xlim([-62.5 62.5]);
+hold on;
+xline(12.5, 'r--', '12.5 MHz', 'LineWidth', 1.5);
+xline(-12.5, 'r--', '-12.5 MHz', 'LineWidth', 1.5);
+
+% Zoom: 0-25 MHz
+subplot(2, 2, 2);
+plot(f_shift/1e6, 20*log10(abs(X_shift)), 'b-', 'LineWidth', 0.8);
+grid on; xlabel('Frequency (MHz)'); ylabel('Magnitude (dB)');
+title('FFT Zoom: 0 - 25 MHz');
+xlim([0 25]);
+hold on;
+xline(12.5, 'r--', 'f_c = 12.5 MHz', 'LineWidth', 1.5);
+
+% Zoom around carrier
+subplot(2, 2, 3);
+plot(f_shift/1e6, 20*log10(abs(X_shift)), 'b-', 'LineWidth', 0.8);
+grid on; xlabel('Frequency (MHz)'); ylabel('Magnitude (dB)');
+title('FFT Zoom: Around 12.5 MHz');
+xlim([11.5 13.5]);
+hold on;
+xline(12.5, 'r--', 'f_c = 12.5 MHz', 'LineWidth', 1.5);
+xline(12.5 + fsym/1e6, 'g:', '+6.25 MHz');
+xline(12.5 - fsym/1e6, 'g:', '-6.25 MHz');
+
+% Baseband FFT
+X_bb = fft(i_rrc(1:n_fft) + 1j*q_rrc(1:n_fft)) / n_fft;
+X_bb_shift = fftshift(X_bb);
+subplot(2, 2, 4);
+plot(f_shift/1e6, 20*log10(abs(X_bb_shift)), 'g-', 'LineWidth', 0.8);
+grid on; xlabel('Frequency (MHz)'); ylabel('Magnitude (dB)');
+title('Baseband FFT (I+jQ)');
+xlim([-10 10]);
 
 %% Summary
 fprintf('========================================\n');

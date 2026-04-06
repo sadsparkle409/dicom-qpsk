@@ -1,0 +1,26 @@
+# Vivado generated project state
+/.Xil/
+/dicom_qpsk.cache/
+/dicom_qpsk.gen/
+/dicom_qpsk.hw/
+/dicom_qpsk.ip_user_files/
+/dicom_qpsk.runs/
+/dicom_qpsk.sim/
+/dicom_qpsk.srcs/utils_1/imports/
+
+# Tool logs generated in the workspace root
+/dfx_runtime.txt
+/ip_upgrade.log
+/vivado.jou
+/vivado.log
+
+# MATLAB editor/autosave output
+/matlab/*.asv
+
+# Local reference material
+/guide/
+/docs/*.pdf
+
+# Local Codex/Claude state
+/.claude/settings.local.json
+/.claude/agent-memory/

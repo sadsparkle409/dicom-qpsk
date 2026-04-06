@@ -1,2 +1,0 @@
-fir_rrc.vhd,vhdl,xil_defaultlib,../../../../dicom_qpsk.gen/sources_1/ip/fir_rrc/sim/fir_rrc.vhd,incdir="../../../../../../tools/AMDDesignTools/2025.2/Vivado/data/rsb/busdef"
-glbl.v,Verilog,xil_defaultlib,glbl.v

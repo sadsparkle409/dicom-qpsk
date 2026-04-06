@@ -1,3 +1,11 @@
+#
+# Constraint status for the current TX milestone:
+# - Pin assignments and clocking are committed here.
+# - Board-level I/O delays for RGMII and DAC remain pending until the
+#   external PHY/DAC timing windows are confirmed from the hardware manual.
+# - The async reset path is excluded from timing below.
+#
+
 set_property -dict {PACKAGE_PIN R4 IOSTANDARD LVCMOS15} [get_ports clk]
 set_property -dict {PACKAGE_PIN U7 IOSTANDARD LVCMOS15} [get_ports resetn]
 
@@ -69,3 +77,9 @@ set_property -dict {PACKAGE_PIN P20 IOSTANDARD LVCMOS33} [get_ports {eth_tx_data
 
 
 set_clock_groups -asynchronous -group [get_clocks eth_rx_clk] -group [get_clocks -filter {NAME =~ "*clk_wiz*"}]
+
+# resetn is an asynchronous external reset, not a timed data input.
+set_false_path -from [get_ports resetn]
+
+# PHY reset is an asynchronous control output, not a source-synchronous data path.
+set_false_path -to [get_ports eth_rst_n]

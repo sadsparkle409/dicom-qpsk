@@ -170,15 +170,30 @@ module top(
     );
 
     //==================================================
-    // Test pattern generator (always enabled for testing)
+    // Current TX milestone: use an internal test pattern for DAC/QPSK bring-up.
+    // The UDP path is still active for loopback and FIFO verification.
     //==================================================
     data_gen u_data_gen (
         .clk          (clk_6m25),
         .rst_n        (sys_rst_n),
-        .enable       (1'b1),              // Always enabled
+        .enable       (1'b1),
         .symbol_out   (symbol),
         .symbol_valid (symbol_valid)
     );
+
+    //==================================================
+    // Next TX step: replace the test generator with UDP-driven symbol mapping.
+    // The module is kept here as the intended hook-up for the next milestone.
+    //==================================================
+//    byte2symbol u_byte2symbol (
+//        .clk          (clk_6m25),
+//        .rst_n        (sys_rst_n),
+//        .din          (fifo_dout),
+//        .din_valid    (~fifo_empty),
+//        .pkt_done     (udp_rec_pkt_done),
+//        .symbol_out   (symbol),
+//        .symbol_valid (symbol_valid)
+//    );
 
     //==================================================
     // qpsk_tx: QPSK modulation and IF generation
